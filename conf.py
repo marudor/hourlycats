@@ -22,5 +22,5 @@ tryPostingCats = 9
 if not path.isdir(pathToCats):
 	raise "pathToCats", pathToCats, "does NOT exist!"
 
-if not path.isdir(pathToErrorCats):
+if pathToErrorCats != '' and not path.isdir(pathToErrorCats):
 	raise "pathToErrorCats", pathToErrorCats, "does NOT exist! set it to '' or create path!"
