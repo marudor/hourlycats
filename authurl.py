@@ -1,8 +1,6 @@
 import urlparse
 import oauth2 as oauth
-
-consumer_key = 'Put your Apps Consumer Key here'
-consumer_secret = 'Pur your Apps Consumer Secret here'
+from conf import *
 
 base_url = "https://twitter.com/oauth/"
 
@@ -11,12 +9,14 @@ client = oauth.Client(consumer)
 
 resp, content = client.request(base_url+'request_token', "GET")
 if resp['status'] != '200':
-    raise Exception("Invalid response %s." % resp['status'])
+	raise Exception("Invalid response %s." % resp['status'])
 
 request_token = dict(urlparse.parse_qsl(content))
 print request_token
 
+print 12*"#", "URL for your browser", 12*"#"
 print "%s?oauth_token=%s" % (base_url+'authorize', request_token['oauth_token'])
+print 13*"#" + "####################" + 13*"#"
 
 pin = raw_input('What is the PIN? ')
 

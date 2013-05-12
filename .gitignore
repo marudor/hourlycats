@@ -33,3 +33,9 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+.idea
+
+# localfoo
+conf_local.py
+cats/
+error_cats/
