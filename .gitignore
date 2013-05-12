@@ -33,3 +33,12 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+
+# PyCharm
+.idea
+
+# localfoo
+conf_local.py
+cats/
+error_cats/

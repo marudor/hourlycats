@@ -1,24 +1,47 @@
 import os, random, tweetpony
+from conf import *
 
-consumer_key = ''
-consumer_secret = ''
-token = ''
-token_secret = ''
 
 def postCat():
-	PathToCats = ''
-	catString = random.choice(os.listdir(PathToCats))
+	catString = ''
+	catPosted = False
+	errorCounter = 0
 
-	cat = open("%s/%s"%(PathToCats,catString)
-	api = tweetpony.API(consumer_key=consumer_key, consumer_secret=consumer_secret, access_token=token, access_token_secret=token_secret)
+	while catPosted is False and errorCounter < tryPostingCats:
+		catString = random.choice(os.listdir(pathToCats))
+		if doPost(catString) is True:
+			catPosted = True
+		else:
+			errorCounter += 1
+
+	if errorCounter > 0:
+		print "had", errorCounter, "errors"
+
+	if catPosted:
+		print "Posted " + catString
+
+
+def doPost(catString):
+	sendingOk = True
+	cat = open("%s/%s" % (pathToCats, catString))
+
 	try:
-		api.update_status_with_media(status = "HourlyCats presents:", media = cat)
+		api = tweetpony.API(consumer_key=consumer_key, consumer_secret=consumer_secret, access_token=token, access_token_secret=token_secret)
+		api.update_status_with_media(status=tweetMessage, media=cat)
 	except tweetpony.APIError as e:
+		sendingOk = False
 		if e.code == 193:
-			os.remove("%s/%s"%(PathToCats,catString))
-			postCat()
+			if pathToErrorCats == '':
+				os.remove("%s/%s" % (pathToCats, catString))
+			else:
+				os.rename("%s/%s" % (pathToCats, catString), "%s/%s" % (pathToErrorCats, catString))
 		else:
 			raise e
-	print "Posted "+catString
+	except Exception as ex:
+		os.rename("%s/%s" % (pathToCats, catString), "%s/%s" % (pathToErrorCats, catString))
+		raise ex
 
-postCat()
+	return sendingOk
+
+if __name__ == "__main__":
+	postCat()
