@@ -4,6 +4,7 @@ hourlycats
 Prereq:
 - oauth2 (pip install oauth2)
 - tweetpony (pip install tweetpony)
+- pillow (pip install pillow - it is a setuptool friendly fork of PIL. Please remove PIL before you install pillow. You can not use both)
 
 authurl.py is used to generate Access Tokens for twitter. Add your Consumer Token/Secret to the script.
 tweet.py is for actualy tweeting - same here, add your tokens. (Consumer and generate Access Tokens)

@@ -1,4 +1,4 @@
-import os, random, tweetpony
+import os, random, tweetpony, imageReduce
 from conf import *
 
 
@@ -31,10 +31,8 @@ def doPost(catString):
 	except tweetpony.APIError as e:
 		sendingOk = False
 		if e.code == 193:
-			if pathToErrorCats == '':
-				os.remove("%s/%s" % (pathToCats, catString))
-			else:
-				os.rename("%s/%s" % (pathToCats, catString), "%s/%s" % (pathToErrorCats, catString))
+			# Image to big. lets reduce quality to 90, resave it - should be small enough then.
+			imageReduce.reduceQuality("%s/%s" % (pathToCats, catString), 90)
 		else:
 			raise e
 	except Exception as ex:
