@@ -28,7 +28,7 @@ class catDb(object):
 	def getCat(self):
 		catsNeedLoveToo = []
 		for cat, count in sorted(self.allCats.iteritems()):
-			if count == self.lowestValue:
+			if count == self.lowestValue and os.path.isfile( "%s/%s" % (pathToCats, cat) ):
 				catsNeedLoveToo.append(cat)
 
 		if len(catsNeedLoveToo) == 0:
