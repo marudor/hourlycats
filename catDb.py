@@ -1,6 +1,7 @@
 import os, random
 from conf import *
 
+
 class catDb(object):
 	def __init__(self):
 		self.dbFile = 'catDb.csv'

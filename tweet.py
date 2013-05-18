@@ -26,6 +26,7 @@ def postCat():
 
 	db.saveDb()
 
+
 def doPost(catString):
 	sendingOk = True
 	cat = open("%s/%s" % (pathToCats, catString))
