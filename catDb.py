@@ -31,6 +31,9 @@ class catDb(object):
 			if count == self.lowestValue:
 				catsNeedLoveToo.append(cat)
 
+		if len(catsNeedLoveToo) == 0:
+			raise "NoKittensError: please put a few kittens into :"+ pathToCats
+
 		return random.choice(catsNeedLoveToo)
 
 	def countThatCat(self, cat):
