@@ -1,18 +1,22 @@
-import os, random, tweetpony, imageReduce
+import os, tweetpony, imageReduce, time
+from catDb import catDb
 from conf import *
 
 
 def postCat():
+	db = catDb()
 	catString = ''
 	catPosted = False
 	errorCounter = 0
 
 	while catPosted is False and errorCounter < tryPostingCats:
-		catString = random.choice(os.listdir(pathToCats))
+		catString = db.getCat()
 		if doPost(catString) is True:
+			db.countThatCat(catString)
 			catPosted = True
 		else:
 			errorCounter += 1
+			time.sleep(1)  # don't spam the server!
 
 	if errorCounter > 0:
 		print "had", errorCounter, "errors"
@@ -20,6 +24,7 @@ def postCat():
 	if catPosted:
 		print "Posted " + catString
 
+	db.saveDb()
 
 def doPost(catString):
 	sendingOk = True

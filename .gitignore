@@ -42,3 +42,4 @@ nosetests.xml
 conf_local.py
 cats/
 error_cats/
+catDb.csv
