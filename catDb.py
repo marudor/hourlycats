@@ -17,7 +17,7 @@ class catDb(object):
 				keyVal = row.split(';')
 				if len(keyVal) == 2:
 					self.allCats[keyVal[0]] = int(keyVal[1])
-					if self.lowestValue == -1 or self.allCats[keyVal[0]] < self.lowestValue:
+					if (self.lowestValue == -1 or self.allCats[keyVal[0]] < self.lowestValue) and os.path.isfile( "%s/%s" % (pathToCats, keyVal[0]) ):
 						self.lowestValue = self.allCats[keyVal[0]]
 
 		for availableCat in os.listdir(pathToCats):
