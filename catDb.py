@@ -43,12 +43,12 @@ class catDb(object):
 			self.allCats[cat] = 1
 
 	def saveDb(self):
-		dbFileHandle = open(self.dbFile, 'w')
 		fullCsv = ''
 		for cat, count in self.allCats.iteritems():
 			fullCsv += "%s;%d\n" % (cat, count)
 
 		# ONLY save, if DB has been changed!
 		if fullCsv != self.csvContent:
+			dbFileHandle = open(self.dbFile, 'w')
 			dbFileHandle.write(fullCsv)
-		dbFileHandle.close()
+			dbFileHandle.close()
