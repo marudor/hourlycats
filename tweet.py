@@ -1,9 +1,9 @@
-import os, tweetpony, imageReduce, time
+import os, tweetpony, imageReduce, time, sys
 from catDb import catDb
 from conf import *
 
 
-def postCat():
+def postCat(message):
 	db = catDb()
 	catString = ''
 	catPosted = False
@@ -11,7 +11,7 @@ def postCat():
 
 	while catPosted is False and errorCounter < tryPostingCats:
 		catString = db.getCat()
-		if doPost(catString) is True:
+		if doPost(catString, message) is True:
 			db.countThatCat(catString)
 			catPosted = True
 		else:
@@ -27,13 +27,14 @@ def postCat():
 	db.saveDb()
 
 
-def doPost(catString):
+def doPost(catString, message):
 	sendingOk = True
 	cat = open("%s/%s" % (pathToCats, catString))
-
+	if message == None or message == "":
+		message = tweetMessage
 	try:
 		api = tweetpony.API(consumer_key=consumer_key, consumer_secret=consumer_secret, access_token=token, access_token_secret=token_secret)
-		api.update_status_with_media(status=tweetMessage, media=cat)
+		api.update_status_with_media(status=message, media=cat)
 	except tweetpony.APIError as e:
 		sendingOk = False
 		if e.code == 193:
@@ -48,4 +49,9 @@ def doPost(catString):
 	return sendingOk
 
 if __name__ == "__main__":
-	postCat()
+	if len(sys.argv) < 3:
+		postCat(None)
+	elif sys.argv[1] == "-m":
+		postCat(sys.argv[2])
+	else:
+		postCat(None)
