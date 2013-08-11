@@ -2,20 +2,20 @@ from os import path
 
 # that's what you get fom twitter
 # https://dev.twitter.com/
-consumer_key = 'Put your Apps Consumer Key here'
-consumer_secret = 'Pur your Apps Consumer Secret here'
+consumer_key='IqQnGlrbg0HohuWC34wTSA'
+consumer_secret='ifmmEsxyj87ohuYOfZI9DCJ5oqVsoxITEeZWQsBdTw'
 
 # place the token and token_secret you get from the authurl.py here
-token = ''
-token_secret = ''
+token='1411214749-NfPvqKt656LbqSEd9n3arHfJVXPx5JLM5nCeVeI'
+token_secret= '6qz6Rlo2Wxpjf2owbpS5ZMG5Rw5LrtSCkuMWuhDVs'
 
 # other configs #
-tweetMessage = "HourlyCats presents:"
+tweetMessage = 'HourlyCats presents:'
 
-pathToCats = 'cats'
+pathToCats = '/home/marudor/projects/KatzenBilder'
 # set errorCats = '' to delete submit fail images
 # or a sub path to save the kittens
-pathToErrorCats = 'error_cats'
+pathToErrorCats = '/home/marudor/projects/KatzenBilderError'
 tryPostingCats = 9
 
 # make dir checks!

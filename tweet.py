@@ -1,18 +1,15 @@
-import os, tweetpony, imageReduce, time, sys
-from catDb import catDb
+import os, tweetpony, imageReduce, time, sys, random
 from conf import *
+from time import gmtime, strftime
 
 
 def postCat(message):
-	db = catDb()
-	catString = ''
 	catPosted = False
 	errorCounter = 0
 
 	while catPosted is False and errorCounter < tryPostingCats:
-		catString = db.getCat()
+		catString = random.choice(os.listdir(pathToCats))
 		if doPost(catString, message) is True:
-			db.countThatCat(catString)
 			catPosted = True
 		else:
 			errorCounter += 1
@@ -22,9 +19,8 @@ def postCat(message):
 		print "had", errorCounter, "errors"
 
 	if catPosted:
-		print "Posted " + catString
+		print "%s Posted %s" % (strftime("%Y%m%d %H:%M:%S", gmtime()), catString)
 
-	db.saveDb()
 
 
 def doPost(catString, message):

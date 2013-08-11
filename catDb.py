@@ -4,7 +4,7 @@ from conf import *
 
 class catDb(object):
 	def __init__(self):
-		self.dbFile = 'catDb.csv'
+		self.dbFile = '/home/marudor/projects/hourlycats/catDb.csv'
 		self.csvContent = ''
 		self.lowestValue = -1
 		self.allCats = {}
@@ -26,7 +26,7 @@ class catDb(object):
 				self.lowestValue = 0
 
 	def getCat(self):
-		catsNeedLoveToo = []
+	        return random.choice(self.allCats.iteritems())
 		for cat, count in sorted(self.allCats.iteritems()):
 			if count == self.lowestValue and os.path.isfile( "%s/%s" % (pathToCats, cat) ):
 				catsNeedLoveToo.append(cat)
